@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package mavsdk.rpc.camera_trigger_server;
+
+import "mavsdk_options.proto";
+
+option java_package = "io.mavsdk.camera_trigger_server";
+option java_outer_classname = "CameraTriggerServerProto";
+
+// Provides handling of camera trigger commands.
+service CameraTriggerServerService {
+    // Subscribe to single-capture MAV_CMD_IMAGE_START_CAPTURE commands
+    rpc SubscribeCapture(SubscribeCaptureRequest) returns(stream CaptureResponse) { option (mavsdk.options.async_type) = ASYNC; }
+}
+
+message SubscribeCaptureRequest {
+}
+
+message CaptureResponse {
+    uint32 sequence_number = 1;
+}
